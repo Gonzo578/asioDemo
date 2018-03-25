@@ -10,6 +10,7 @@ before_script:
 script:
   - uname -a
   - $CXX --version
+  - cat /usr/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
   
   - mkdir -p build && cd build
   - cmake ..
