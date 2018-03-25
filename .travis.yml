@@ -8,5 +8,6 @@ script:
   - $CXX --version
   
   - mkdir -p build && cd build
+  - cmake ..
   - make
   
