@@ -1,0 +1,12 @@
+language: cpp
+
+dist: trusty
+sudo: required
+
+script:
+  - uname -a
+  - $CXX --version
+  
+  - mkdir -p build && cd build
+  - make
+  
