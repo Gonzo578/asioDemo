@@ -3,6 +3,9 @@ language: cpp
 dist: trusty
 sudo: required
 
+before_script:
+  - sudo apt-get install libboost-dev=1.58
+
 script:
   - uname -a
   - $CXX --version
