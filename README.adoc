@@ -3,6 +3,9 @@ Template Project
 
 = Folder Structure
 
+The folder structure looks like this...
+
+
 == build - Folder
 Folder used for out of source builds.
 
