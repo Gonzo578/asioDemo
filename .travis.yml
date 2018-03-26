@@ -6,24 +6,29 @@ dist: trusty
 compiler:
   - gcc
      
-before_install:
-  - echo $TRAVIS_BRANCH
+#before_install:
+#  - echo $TRAVIS_BRANCH
   # C++14
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
+#  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+#  - sudo apt-get update -qq
   
-install: 
+#install: 
   # C++14
-- sudo apt-get install -qq g++-5
+#  - sudo apt-get install -qq g++-5
 
 addons:
+  sources: 
+      - ubuntu-toolchain-r-test
   apt:
     packages: libboost-all-dev
-    
-script:
+
+before_script:
+  - grep "#define BOOST_VERSION " /usr/include/boost/version.hpp
   - uname -a
   - $CXX --version
-  - cmake --version
+  - cmake --version    
+
+script:
   - mkdir -p build && cd build
   - cmake ..
   - make
