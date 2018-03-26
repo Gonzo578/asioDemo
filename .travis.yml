@@ -1,18 +1,23 @@
 language: cpp
 
 dist: trusty
-sudo: required
+sudo: false
+os: Linux
 compiler: gcc
 
-before_script:
-  - sudo apt-get update -qq
-  - sudo apt-get install libboost-dev-all
+addons:
+  apt:
+    packages:
+      - libboost-all-dev
+
+#before_script:
+#  - sudo apt-get update -qq
+#  - sudo apt-get install libboost-dev-all
 
 script:
   - uname -a
   - $CXX --version
-  - cat /usr/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
-  
+  - cmake --version  
   - mkdir -p build && cd build
   - cmake ..
   - make
