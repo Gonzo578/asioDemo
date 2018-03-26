@@ -1,6 +1,8 @@
 Template Project
 ================
 
+image:https://travis-ci.org/Gonzo578/boostDemo.svg?branch=master["Build Status", link="https://travis-ci.org/Gonzo578/boostDemo"]
+
 = Folder Structure
 
 The folder structure looks like this...
