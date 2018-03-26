@@ -1,14 +1,23 @@
 language: cpp
-
-dist: trusty
 sudo: false
-os: Linux
-compiler: gcc
+
+os:
+  - Linux
+compiler:
+  - gcc
 
 addons:
   apt:
     packages:
       - libboost-all-dev
+      
+install:
+  # Freely inspired from https://github.com/boostorg/hana/blob/master/.travis.yml
+  ############################################################################
+  # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
+  ############################################################################
+  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
 
 script:
   - uname -a
