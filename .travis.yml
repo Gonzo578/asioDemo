@@ -13,7 +13,8 @@ addons:
 script:
   - uname -a
   - $CXX --version
-  - cmake --version  
+  - cmake --version
+  - dpkg -s libboost-dev | grep 'Version'  
   - mkdir -p build && cd build
   - cmake ..
   - make
