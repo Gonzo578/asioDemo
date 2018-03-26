@@ -14,7 +14,7 @@ script:
   - uname -a
   - $CXX --version
   - cmake --version
-  - dpkg -s libboost-dev | grep 'Version'  
+  - cat /usr/include/boost/version.hpp | grep "BOOST_LIB_VERSION"  
   - mkdir -p build && cd build
   - cmake ..
   - make
