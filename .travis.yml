@@ -10,6 +10,7 @@ addons:
   apt:
     packages:
       - libboost-all-dev
+      - dpkg
       
 install:
   # Freely inspired from https://github.com/boostorg/hana/blob/master/.travis.yml
@@ -20,10 +21,10 @@ install:
   - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
 
 script:
+  - dpkg -s libboost-dev | grep 'Version'
   - uname -a
   - $CXX --version
   - cmake --version
-  - cat /usr/include/boost/version.hpp | grep "BOOST_LIB_VERSION"  
   - mkdir -p build && cd build
   - cmake ..
   - make
