@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
-sudo: require
+sudo: false
 dist: trusty
 
 compiler:
