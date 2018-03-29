@@ -7,8 +7,10 @@ compiler:
   - gcc
 
 addons:
+  sources:
+    - ubuntu-toolchain-r-test
   apt:
-    packages: libboost-all-dev
+    packages: libboost1.58-all-dev
 
 before_script:
   - grep "#define BOOST_VERSION " /usr/include/boost/version.hpp
