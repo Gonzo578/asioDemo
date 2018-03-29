@@ -8,7 +8,7 @@ compiler:
 
 addons:
   apt:
-    packages: libboost1.58-all-dev
+    packages: libboost-all-dev
 
 before_script:
   - grep "#define BOOST_VERSION " /usr/include/boost/version.hpp
