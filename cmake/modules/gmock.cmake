@@ -7,7 +7,7 @@
 #
 function(add_gmock_test target)
     add_executable(${target} ${ARGN})
-    target_link_libraries(${target} gmock_main)
+    target_link_libraries(${target} ${CONAN_LIBS})
     
     add_test(${target} ${target})
     

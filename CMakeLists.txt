@@ -23,13 +23,15 @@ include(gmock)
 # Testing configuration
 enable_testing()
 
+add_subdirectory(components)
+
 # Project source files
 set (project_SRC
     src/main.cc
 )
 
 # Main project target configuration
-add_executable (projTemplate ${project_SRC})
+add_executable (asioDemo ${project_SRC})
 
 # Target link libraries
-target_link_libraries(projTemplate pthread ${CONAN_LIBS})
+target_link_libraries(asioDemo pthread ${CONAN_LIBS})
