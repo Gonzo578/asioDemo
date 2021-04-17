@@ -1,71 +1,48 @@
 #include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
 #include <string>
-using std::string;
+#include <asio.hpp>
 
-#include <boost/program_options.hpp>
-namespace po = boost::program_options;
-#include <boost/version.hpp>
+#define MAXLEN 512 // maximum buffer size
 
-#include "ToDo/includes/ToDo.h"
+int main() {
 
-int main (int argc, char** argv) {
-	ToDo list;
-
-	po::options_description desc("Options");
-	desc.add_options()
-		("help,h", "display this help")
-		("add,a", po::value<string>(), "add a new entry to the To Do list");
-
-	bool parseError = false;
-	po::variables_map vm;
+	asio::io_service io;
 
 	try {
-		po::store(po::parse_command_line(argc, argv, desc), vm);
-		po::notify(vm);
-	} catch (po::error& error) {
-		cerr << "Error: " << error.what() << "\n" << endl;
-		parseError = true;
-	}
+		// create a serial port object
+		asio::serial_port serial(io);
 
-	if(parseError || vm.count("help")) {
-		cout << "todo: A simple To Do list program" << "\n";
-		cout										<< "\n";
-		cout << "Usage:"							<< "\n";
-		cout << "  "  << argv[0] << " [options]"	<< "\n";
-		cout										<< "\n";
-		cout << desc								<< "\n";
-		cout										<< "\n";
-		cout << "Boost Version: " << BOOST_LIB_VERSION << "\n";
+		serial.open("/dev/ttyUSB0");
 
-		if(parseError) {
-			return 64;
-		} else {
-			return 0;
+		for (;;) {
+			// get a string from the user, sentiel is exit
+			std::string input;
+			std::cout << "Enter Message: ";
+			std::cin >> input;
+
+			if (input == "exit") break;
+
+			// write to the port
+			// asio::write guarantees that the entire buffer is written to the serial port
+			asio::write(serial, asio::buffer(input));
+
+			char data[MAXLEN];
+
+			// read bytes from the serial port
+			// asio::read will read bytes until the buffer is filled
+			size_t nread = asio::read(serial, asio::buffer(data, input.length()));
+
+			std::string message(data, nread);
+
+			std::cout << "Recieved: ";
+			std::cout << message << std::endl;
 		}
+		
+		serial.close();
 	}
-
-	cout << "Hello World!" << endl;
-
-	list.addTask("write code");
-	list.addTask("compile");
-	list.addTask("test");
-
-	cout << "Tasks:" << "\n";
-	cout << "Tasks 1: " << list.getTask(size_t(0)) << "\n";
-	cout << "Tasks 2: " << list.getTask(size_t(1)) << "\n";
-	cout << "Tasks 3: " << list.getTask(size_t(2)) << "\n";
-
-	if(vm.count("add")) {
-		list.addTask(vm["add"].as<string>());
+	catch (asio::system_error& e) {
+		std::cerr << e.what() << std::endl;
 	}
-
-	for (size_t i=0; i<list.size(); i++) {
-		cout << list.getTask(i) << "\n";
-	}
-
 
 	return 0;
 }

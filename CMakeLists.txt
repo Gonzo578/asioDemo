@@ -48,4 +48,4 @@ set (project_comp_LIBS
 add_executable (projTemplate ${project_SRC})
 
 # Target link libraries
-target_link_libraries(projTemplate ${project_comp_LIBS} ${Boost_LIBRARIES})
+target_link_libraries(projTemplate pthread ${project_comp_LIBS} ${Boost_LIBRARIES})
