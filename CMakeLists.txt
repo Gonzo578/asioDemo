@@ -17,9 +17,6 @@ conan_basic_setup()
 # Add local module path to the cmake modules search path
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
-# Include local cmake modules
-include(gmock)
-
 # Testing configuration
 enable_testing()
 
