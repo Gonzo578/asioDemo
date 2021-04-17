@@ -1,12 +1,3 @@
-set(GMOCK_DIR "external/googletest"
-    CACHE PATH "The path to the GoogleMock test framework.")
-    
-add_subdirectory(${GMOCK_DIR} ${CMAKE_BINARY_DIR}/googlemock)
-
-set_property(TARGET gtest APPEND_STRING PROPERTY COMPILE_FLAGS " -w")
-
-include_directories(SYSTEM ${GMOCK_DIR}/googlemock/include ${GMOCK_DIR}/googletest/include)
-
 #
 # add_gmock_test(<target> <sources>...)
 #

@@ -1,4 +1,5 @@
  [requires]
+ asio/1.18.1
  gtest/1.10.0
 
  [generators]
